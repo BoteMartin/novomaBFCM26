@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVOMA x BOTE · Black Friday 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0B0B0F;
+            --surface: #141418;
+            --surface-2: #1A1A20;
+            --border: #222228;
+            --text: #EAEAEE;
+            --text-sec: #8A8A92;
+            --text-mute: #55555E;
+            --gold: #C8A96E;
+            --gold-soft: #D4B77E;
+            --gold-dim: rgba(200,169,110,0.12);
+            --gold-border: rgba(200,169,110,0.25);
+            --r: 10px;
+            --ease: cubic-bezier(0.16,1,0.3,1);
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        ::selection{background:rgba(200,169,110,0.3);color:var(--text)}
+        html,body{height:100%;overflow:hidden}
+
+        body{
+            font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+            background:var(--bg);
+            background-image:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,0.04) 0%,transparent 50%);
+            color:var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
+
+        body::after{
+            content:'';position:fixed;inset:0;opacity:0.018;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events:none;z-index:50;
+        }
+
+        .progress{
+            position:fixed;top:0;left:0;height:2px;
+            background:var(--gold);
+            box-shadow:0 0 12px rgba(200,169,110,0.3);
+            transition:width 0.5s var(--ease);z-index:200;
+        }
+
+        .brand{
+            position:fixed;top:2rem;right:3rem;
+            font-size:0.65rem;font-weight:600;letter-spacing:0.2em;
+            color:var(--text-mute);z-index:100;
+        }
+
+        .deck{position:relative;width:100vw;height:100vh}
+
+        .slide{
+            position:absolute;inset:0;
+            display:flex;align-items:center;justify-content:center;
+            padding:5rem 4rem 6rem;
+            opacity:0;pointer-events:none;transition:opacity 0.5s ease;
+        }
+        .slide.active{opacity:1;pointer-events:auto}
+        .slide-inner{width:100%;max-width:860px}
+
+        .rv{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s var(--ease)}
+        .slide.active .rv{opacity:1;transform:translateY(0)}
+        .slide.active .rv.d1{transition-delay:.08s}
+        .slide.active .rv.d2{transition-delay:.16s}
+        .slide.active .rv.d3{transition-delay:.24s}
+        .slide.active .rv.d4{transition-delay:.32s}
+
+        @media(prefers-reduced-motion:reduce){
+            .rv{transition:none!important;opacity:1!important;transform:none!important}
+            .slide,.progress{transition:none!important}
+        }
+
+        .tc{text-align:center}
+        .title-main{
+            font-size:clamp(2.4rem,7vw,4.5rem);
+            font-weight:200;letter-spacing:-0.04em;line-height:1.05;
+        }
+        .title-main span{font-weight:500}
+        .accent-bar{
+            width:0;height:2px;background:var(--gold);margin:2rem auto;
+            transition:width 0.9s var(--ease) 0.25s;
+        }
+        .slide.active .accent-bar{width:60px}
+        .title-sub{
+            font-size:clamp(0.75rem,1.5vw,0.95rem);
+            font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-mute);
+        }
+        .title-period{
+            margin-top:1.5rem;font-size:0.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-sec);
+        }
+
+        .tag{font-size:0.65rem;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem}
+        .heading{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:300;letter-spacing:-0.03em;line-height:1.15;margin-bottom:1rem}
+        .heading strong{font-weight:600}
+        .desc{font-size:0.92rem;line-height:1.7;color:var(--text-sec);max-width:620px}
+        .desc strong{color:var(--text);font-weight:600}
+
+        /* Info card rows */
+        .ic{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-top:1.5rem}
+        .ir{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border);gap:1rem}
+        .ir:last-child{border-bottom:none}
+        .ir-l{font-size:0.88rem;font-weight:500;color:var(--text);flex:1}
+        .ir-sub{font-size:0.72rem;color:var(--text-mute);margin-top:.2rem;font-weight:400}
+        .ir-v{font-size:0.9rem;font-weight:600;white-space:nowrap;color:var(--text-sec)}
+        .ir.hl{background:var(--gold-dim)}
+        .ir.hl .ir-l,.ir.hl .ir-v{color:var(--gold);font-weight:700}
+
+        /* Dispositif : 3 blocs */
+        .disp-grid{
+            margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem;align-items:stretch;
+        }
+        .disp-card{
+            background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+            padding:1.5rem 1.35rem;transition:border-color .3s;
+            display:flex;flex-direction:column;
+        }
+        .disp-card:hover{border-color:var(--gold-border)}
+        .disp-n{
+            font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:1.1rem;
+            letter-spacing:-0.01em;line-height:1.25;
+            padding-bottom:.85rem;border-bottom:1px solid var(--border);
+        }
+        .disp-l{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+        .disp-l li{
+            font-size:0.85rem;color:var(--text-sec);padding-left:1rem;position:relative;line-height:1.4;
+        }
+        .disp-l li::before{
+            content:'';position:absolute;left:0;top:.55rem;
+            width:4px;height:4px;border-radius:50%;background:var(--gold);
+        }
+
+        /* Tranches */
+        .tranches{
+            margin-top:1.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;
+        }
+        .tr-card{
+            background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+            padding:1.5rem 1.25rem;text-align:center;
+            transition:all .3s;position:relative;
+        }
+        .tr-card.active{
+            background:var(--gold-dim);border-color:var(--gold-border);
+            box-shadow:0 0 0 1px var(--gold-border);
+        }
+        .tr-badge{
+            position:absolute;top:-.6rem;left:50%;transform:translateX(-50%);
+            background:var(--gold);color:#0B0B0F;
+            font-size:0.58rem;font-weight:700;letter-spacing:.15em;
+            text-transform:uppercase;padding:.25rem .6rem;border-radius:100px;
+        }
+        .tr-t{font-size:0.62rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mute);margin-bottom:.5rem}
+        .tr-card.active .tr-t{color:var(--gold)}
+        .tr-range{font-size:0.82rem;font-weight:600;color:var(--text);margin-bottom:1rem}
+        .tr-price{font-size:1.8rem;font-weight:700;color:var(--text)}
+        .tr-card.active .tr-price{color:var(--gold)}
+        .tr-unit{font-size:0.7rem;color:var(--text-mute);margin-top:.2rem}
+
+        .calcul{
+            margin-top:1.25rem;padding:1rem 1.5rem;
+            background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+            display:flex;justify-content:space-between;align-items:center;gap:1rem;
+        }
+        .calcul-l{font-size:0.85rem;color:var(--text-sec)}
+        .calcul-l strong{color:var(--text);font-weight:600}
+        .calcul-v{font-size:1.15rem;font-weight:700;color:var(--gold);white-space:nowrap}
+
+        /* Recap */
+        .recap{margin-top:1.25rem;display:flex;flex-direction:column;gap:.65rem}
+        .recap-item{
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:var(--r);padding:1.1rem 1.5rem;
+            display:flex;justify-content:space-between;align-items:center;gap:1rem;
+        }
+        .recap-left{flex:1}
+        .recap-label{font-size:0.88rem;font-weight:600;color:var(--text)}
+        .recap-sub{font-size:0.72rem;color:var(--text-mute);margin-top:.15rem}
+        .recap-amt{font-size:1.05rem;font-weight:700;color:var(--text);white-space:nowrap}
+
+        .recap-total{
+            background:var(--gold-dim);border:1px solid var(--gold-border);
+            border-radius:var(--r);padding:1.25rem 1.5rem;
+            display:flex;justify-content:space-between;align-items:center;
+        }
+        .recap-total-label{
+            font-size:0.7rem;font-weight:700;letter-spacing:0.18em;
+            text-transform:uppercase;color:var(--gold);
+        }
+        .recap-total-amt{font-size:1.5rem;font-weight:700;color:var(--gold)}
+
+        /* Nav */
+        .nav{
+            position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);
+            display:flex;align-items:center;gap:.75rem;z-index:100;
+        }
+        .nav-btn{
+            width:2.25rem;height:2.25rem;border:1px solid var(--border);
+            border-radius:50%;background:var(--surface);color:var(--text-mute);
+            cursor:pointer;display:flex;align-items:center;justify-content:center;
+            font-size:0.85rem;transition:all .25s ease;-webkit-tap-highlight-color:transparent;
+        }
+        .nav-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+        .nav-btn:active{transform:scale(0.92)}
+
+        .dots{display:flex;gap:.4rem}
+        .dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s ease}
+        .dot.on{background:var(--gold);transform:scale(1.35);box-shadow:0 0 8px rgba(200,169,110,0.35)}
+
+        .counter{
+            position:fixed;bottom:2.25rem;right:3rem;
+            font-size:0.7rem;font-weight:500;letter-spacing:.08em;color:var(--text-mute);z-index:100;
+        }
+        .counter .c{color:var(--text-sec);font-weight:600}
+
+        @media(max-width:900px){
+            .slide{padding:4rem 3rem 5.5rem}
+            .brand{top:1.5rem;right:2rem}
+            .disp-grid{grid-template-columns:1fr;gap:.7rem}
+        }
+
+        @media(max-width:680px){
+            .slide{padding:2.5rem 1.5rem 4rem;align-items:flex-start;overflow-y:auto}
+            .brand{top:1.25rem;right:1.5rem;font-size:.6rem}
+            .heading{font-size:1.5rem;margin-bottom:.75rem}
+            .tag{margin-bottom:.5rem}
+            .desc{font-size:.85rem}
+            .nav{bottom:1rem}
+            .counter{bottom:1.25rem;right:1.5rem}
+            .ir{padding:.95rem 1.15rem}
+            .ic{margin-top:1rem}
+            .recap{margin-top:1rem;gap:.5rem}
+            .recap-item{padding:1rem 1.25rem}
+            .recap-total{padding:1rem 1.25rem}
+            .recap-total-amt{font-size:1.3rem}
+            .tranches{grid-template-columns:1fr;gap:.6rem;margin-top:1rem}
+            .tr-card{padding:1.1rem 1rem;display:flex;justify-content:space-between;align-items:center;text-align:left}
+            .tr-t{margin-bottom:0}
+            .tr-range{margin-bottom:0;font-size:.78rem}
+            .tr-price{font-size:1.3rem}
+            .tr-unit{display:none}
+            .tr-badge{position:static;transform:none;margin-left:auto}
+            .tr-card.active{flex-wrap:wrap}
+            .calcul{padding:.9rem 1.15rem;margin-top:1rem}
+        }
+
+        @media(max-width:440px){
+            .slide{padding:2rem 1.25rem 3.5rem}
+            .heading{font-size:1.25rem;margin-bottom:.5rem}
+            .title-main{font-size:2rem}
+            .brand,.counter{display:none}
+            .ir{flex-direction:column;align-items:flex-start;gap:.25rem;padding:.7rem 1rem}
+            .ir-v{align-self:flex-end}
+            .recap-item{flex-direction:column;align-items:flex-start;gap:.5rem;padding:.9rem 1rem}
+            .recap-amt{font-size:1rem}
+            .recap-total{flex-direction:column;align-items:flex-start;gap:.25rem;padding:.9rem 1rem}
+            .recap-total-amt{font-size:1.2rem}
+            .calcul{flex-direction:column;align-items:flex-start;gap:.4rem}
+            .tr-card{padding:.9rem 1rem}
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress" id="progress" style="width:20%"></div>
+    <div class="brand">BOTE.</div>
+
+    <div class="deck">
+
+        <!-- 1. Title -->
+        <div class="slide active">
+            <div class="slide-inner tc">
+                <h1 class="title-main rv">NOVOMA <span>x</span> BOTE</h1>
+                <div class="accent-bar"></div>
+                <div class="title-sub rv d2">Devis Black Friday 2026</div>
+                <div class="title-period rv d3">Novembre 2026 · Black Friday et Cyber Monday</div>
+            </div>
+        </div>
+
+        <!-- 2. Le dispositif -->
+        <div class="slide">
+            <div class="slide-inner">
+                <div class="tag rv">Black Friday</div>
+                <h2 class="heading rv d1">Le <strong>dispositif</strong></h2>
+                <p class="desc rv d2">Le Black Friday Novoma tient en <strong>46 e-mails</strong>, produits de A à Z par BOTE, avec la stratégie en amont et un accompagnement sur toute la période.</p>
+                <div class="disp-grid rv d3">
+                    <div class="disp-card">
+                        <div class="disp-n">46 e-mails</div>
+                        <ul class="disp-l">
+                            <li>Conception et rédaction</li>
+                            <li>Design</li>
+                            <li>Intégration Klaviyo</li>
+                            <li>QA avant envoi</li>
+                        </ul>
+                    </div>
+                    <div class="disp-card">
+                        <div class="disp-n">Stratégie complète</div>
+                        <ul class="disp-l">
+                            <li>Livrable Miro</li>
+                            <li>Briefs</li>
+                            <li>Calendrier d'envoi et segmentation</li>
+                        </ul>
+                    </div>
+                    <div class="disp-card">
+                        <div class="disp-n">Accompagnement</div>
+                        <ul class="disp-l">
+                            <li>Calls de suivi sur la période</li>
+                            <li>Monitoring quotidien</li>
+                            <li>Ajustements en cours</li>
+                            <li>Debrief final</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Facturation -->
+        <div class="slide">
+            <div class="slide-inner">
+                <div class="tag rv">Facturation</div>
+                <h2 class="heading rv d1">Principe</h2>
+                <p class="desc rv d2">Sur les 46 e-mails du Black Friday, <strong>20 passent dans le volume mensuel</strong> prévu au contrat. Les <strong>26 restants</strong> sont facturés en supplément, selon la grille dégressive BOTE.</p>
+                <div class="ic rv d3">
+                    <div class="ir">
+                        <div class="ir-l">Production totale</div>
+                        <span class="ir-v">46 e-mails</span>
+                    </div>
+                    <div class="ir">
+                        <div class="ir-l">Inclus dans le contrat mensuel</div>
+                        <span class="ir-v">20 e-mails</span>
+                    </div>
+                    <div class="ir hl">
+                        <div class="ir-l">Volume facturé</div>
+                        <span class="ir-v">26 e-mails</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Grille -->
+        <div class="slide">
+            <div class="slide-inner">
+                <div class="tag rv">Grille BOTE</div>
+                <h2 class="heading rv d1">Grille <strong>dégressive</strong></h2>
+                <p class="desc rv d2">Plus le volume facturé est élevé, plus le prix unitaire baisse. La grille est cumulative : sur 26 e-mails, les 10 premiers sont en tranche 1, les 10 suivants en tranche 2 et les 6 derniers en tranche 3.</p>
+                <div class="tranches rv d3">
+                    <div class="tr-card active">
+                        <div class="tr-badge">Applicable</div>
+                        <div class="tr-t">Tranche 1</div>
+                        <div class="tr-range">0 à 10 unités</div>
+                        <div class="tr-price">200 €</div>
+                        <div class="tr-unit">par unité HT</div>
+                    </div>
+                    <div class="tr-card active">
+                        <div class="tr-badge">Applicable</div>
+                        <div class="tr-t">Tranche 2</div>
+                        <div class="tr-range">10 à 20 unités</div>
+                        <div class="tr-price">150 €</div>
+                        <div class="tr-unit">par unité HT</div>
+                    </div>
+                    <div class="tr-card active">
+                        <div class="tr-badge">Applicable</div>
+                        <div class="tr-t">Tranche 3</div>
+                        <div class="tr-range">20 unités et plus</div>
+                        <div class="tr-price">125 €</div>
+                        <div class="tr-unit">par unité HT</div>
+                    </div>
+                </div>
+                <div class="calcul rv d4">
+                    <span class="calcul-l"><strong>10</strong> × 200 € + <strong>10</strong> × 150 € + <strong>6</strong> × 125 € HT</span>
+                    <span class="calcul-v">4 250,00 € HT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Total -->
+        <div class="slide">
+            <div class="slide-inner">
+                <div class="tag rv">Récapitulatif</div>
+                <h2 class="heading rv d1">Total <strong>projet</strong></h2>
+                <p class="desc rv d2">La production des 26 e-mails hors contrat, plus l'accompagnement sur toute la période du Black Friday : calls de suivi, monitoring, ajustements et debrief.</p>
+                <div class="recap rv d3">
+                    <div class="recap-item">
+                        <div class="recap-left">
+                            <div class="recap-label">Production Black Friday</div>
+                            <div class="recap-sub">26 e-mails facturés · tranches 1, 2 et 3</div>
+                        </div>
+                        <div class="recap-amt">4 250,00 € HT</div>
+                    </div>
+                    <div class="recap-item">
+                        <div class="recap-left">
+                            <div class="recap-label">Accompagnement sur la période</div>
+                            <div class="recap-sub">Calls de suivi, monitoring, ajustements, debrief</div>
+                        </div>
+                        <div class="recap-amt">1 000,00 € HT</div>
+                    </div>
+                    <div class="recap-total">
+                        <span class="recap-total-label">Total HT</span>
+                        <span class="recap-total-amt">5 250,00 €</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="nav">
+        <button class="nav-btn" onclick="go(-1)" aria-label="Précédent">←</button>
+        <div class="dots" id="dots"></div>
+        <button class="nav-btn" onclick="go(1)" aria-label="Suivant">→</button>
+    </div>
+    <div class="counter"><span class="c" id="cur">01</span> / <span id="tot">05</span></div>
+
+    <script>
+        const slides=document.querySelectorAll('.slide'),N=slides.length;
+        let i=0;
+
+        const dotsEl=document.getElementById('dots');
+        for(let d=0;d<N;d++){
+            const dot=document.createElement('div');
+            dot.className='dot'+(d===0?' on':'');
+            dot.onclick=()=>jump(d);
+            dotsEl.appendChild(dot);
+        }
+
+        function update(){
+            slides.forEach((s,idx)=>s.classList.toggle('active',idx===i));
+            document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('on',idx===i));
+            document.getElementById('cur').textContent=String(i+1).padStart(2,'0');
+            document.getElementById('tot').textContent=String(N).padStart(2,'0');
+            document.getElementById('progress').style.width=((i+1)/N*100)+'%';
+        }
+
+        function go(dir){i=(i+dir+N)%N;update()}
+        function jump(idx){i=idx;update()}
+
+        document.addEventListener('keydown',e=>{
+            if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(1)}
+            else if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}
+            else if(e.key==='Escape'){jump(0)}
+            else if(+e.key>=1&&+e.key<=N){jump(+e.key-1)}
+        });
+
+        let tx=0;
+        document.addEventListener('touchstart',e=>{tx=e.changedTouches[0].screenX},{passive:true});
+        document.addEventListener('touchend',e=>{
+            const dx=e.changedTouches[0].screenX-tx;
+            if(dx<-50)go(1);else if(dx>50)go(-1);
+        });
+    </script>
+</body>
+</html>
